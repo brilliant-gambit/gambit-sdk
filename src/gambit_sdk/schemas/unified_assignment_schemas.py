@@ -2,7 +2,8 @@ from datetime import date, datetime
 from typing import Any
 
 from pydantic import BaseModel, Field
-from unified_exercise_schema import UnifiedExercise
+
+from gambit_sdk.schemas.unified_exercise_schema import UnifiedExercise
 
 
 class UnifiedAssignmentPreview(BaseModel):
