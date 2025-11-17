@@ -1,6 +1,6 @@
 # Gambit Platform Integration SDK
 
-[![PyPI version](https://badge.fury.io/py/gambit-sdk.svg)](https://badge.fury.io/py/gambit-sdk)
+[![PyPI version](https://badge.fury.io/py/gambit-sdk.svg?v=1)](https://badge.fury.io/py/gambit-sdk)
 [![Python Version](https://img.shields.io/pypi/pyversions/gambit-sdk)](https://pypi.org/project/gambit-sdk/)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 
