@@ -1,6 +1,6 @@
-from typing import Any
-
 from pydantic import BaseModel
+
+from gambit_sdk import UnifiedSolution
 
 
 class UnifiedGrade(BaseModel):
@@ -9,4 +9,4 @@ class UnifiedGrade(BaseModel):
     max_score: float
     is_passed: bool
     feedback: str | None = None
-    correct_answers: dict[str, Any] | None = None
+    correct_solution: UnifiedSolution | None = None

@@ -15,6 +15,9 @@ from .unified_assignment_schemas import (
     UnifiedAssignmentDetails,
     UnifiedAssignmentPreview,
 )
+from .unified_attempt_schema import (
+    UnifiedAttempt,
+)
 from .unified_exercise_schema import UnifiedExercise
 from .unified_grade_schema import UnifiedGrade
 from .unified_solution_schema import (
@@ -34,6 +37,7 @@ __all__ = [
     "TextFileAnswer",
     "UnifiedAssignmentDetails",
     "UnifiedAssignmentPreview",
+    "UnifiedAttempt",
     "UnifiedExercise",
     "UnifiedGrade",
     "UnifiedSolution",

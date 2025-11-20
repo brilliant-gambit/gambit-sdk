@@ -5,6 +5,7 @@ from httpx import AsyncClient
 from gambit_sdk.schemas import (
     UnifiedAssignmentDetails,
     UnifiedAssignmentPreview,
+    UnifiedAttempt,
     UnifiedGrade,
     UnifiedSolution,
 )
@@ -34,14 +35,14 @@ class BaseAdapter(ABC):
     @abstractmethod
     async def get_assignment_details(
             self,
-            preview: UnifiedAssignmentPreview,
-    ) -> UnifiedAssignmentDetails:
+            assignment: UnifiedAssignmentPreview,
+    ) -> tuple[UnifiedAssignmentDetails, UnifiedAttempt]:
         pass
 
     @abstractmethod
     async def submit_solution(
             self,
-            details: UnifiedAssignmentDetails,
+            attempt: UnifiedAttempt,
             solution: UnifiedSolution,
     ) -> UnifiedGrade | None:
         pass
@@ -49,6 +50,6 @@ class BaseAdapter(ABC):
     @abstractmethod
     async def get_grade(
             self,
-            details: UnifiedAssignmentPreview,
+            attempt: UnifiedAttempt,
     ) -> UnifiedGrade | None:
         pass
