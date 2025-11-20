@@ -14,10 +14,6 @@ class UnifiedAssignmentPreview(BaseModel):
     context_data: dict[str, Any] = Field(default_factory=dict)
 
 
-class UnifiedAssignmentDetails(BaseModel):
-    platform_assignment_id: str
-    title: str
+class UnifiedAssignmentDetails(UnifiedAssignmentPreview):
     description: str | None = None
-    assigned_date: date
-    deadline: datetime
     exercises: list[UnifiedExercise]
