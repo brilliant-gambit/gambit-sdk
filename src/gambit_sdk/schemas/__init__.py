@@ -4,10 +4,10 @@ from .exercise_structure_schemas import (
     OrderingStructure,
 )
 from .solution_type_schemas import (
-    SingleChoiceAnswer,
-    MultipleChoiceAnswer,
     MatchingAnswer,
+    MultipleChoiceAnswer,
     OrderingAnswer,
+    SingleChoiceAnswer,
     StringAnswer,
     TextAnswer,
     TextFileAnswer,
@@ -27,13 +27,13 @@ from .unified_solution_schema import (
 )
 
 __all__ = [
-    "SingleChoiceAnswer",
-    "MultipleChoiceAnswer",
     "ChoiceStructure",
     "MatchingAnswer",
     "MatchingStructure",
+    "MultipleChoiceAnswer",
     "OrderingAnswer",
     "OrderingStructure",
+    "SingleChoiceAnswer",
     "StringAnswer",
     "TextAnswer",
     "TextFileAnswer",

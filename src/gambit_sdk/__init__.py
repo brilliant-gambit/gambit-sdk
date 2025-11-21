@@ -11,16 +11,17 @@ The main entry points are:
   structures used for communication with the Gambit CORE system.
 """
 
+from . import errors, utils
 from .base_adapter import BaseAdapter
 from .enums import ExerciseType
 from .schemas import (
-    SingleChoiceAnswer,
-    MultipleChoiceAnswer,
     ChoiceStructure,
     MatchingAnswer,
     MatchingStructure,
+    MultipleChoiceAnswer,
     OrderingAnswer,
     OrderingStructure,
+    SingleChoiceAnswer,
     StringAnswer,
     TextAnswer,
     TextFileAnswer,
@@ -32,18 +33,17 @@ from .schemas import (
     UnifiedSolution,
     UnifiedSolutionExercise,
 )
-from . import errors, utils
 
 __all__ = [
     "BaseAdapter",
-    "SingleChoiceAnswer",
-    "MultipleChoiceAnswer",
     "ChoiceStructure",
     "ExerciseType",
     "MatchingAnswer",
     "MatchingStructure",
+    "MultipleChoiceAnswer",
     "OrderingAnswer",
     "OrderingStructure",
+    "SingleChoiceAnswer",
     "StringAnswer",
     "TextAnswer",
     "TextFileAnswer",
