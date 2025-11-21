@@ -30,16 +30,16 @@ class UnifiedSolutionExercise(BaseModel):
     )
 
     @model_validator(mode="after")
-    def check_answer_type_match(self) -> UnifiedSolutionExercise:
-        if self.answer_type == ExerciseType.UNSUPPORTED:
+    def check_exercise_type_match(self) -> UnifiedSolutionExercise:
+        if self.exercise_type == ExerciseType.UNSUPPORTED:
             return self
 
-        expected_class = EXERCISE_TYPE_TO_ANSWER_CLASS.get(self.answer_type)
+        expected_class = EXERCISE_TYPE_TO_ANSWER_CLASS.get(self.exercise_type)
 
         if expected_class is None:
             raise SolutionTypeMismatchError(
                 unified_solution_exercise=self,
-                message=f"Unknown or unmapped exercise type: {self.answer_type}",
+                message=f"Unknown or unmapped exercise type: {self.exercise_type}",
             )
 
         if not isinstance(self.answer, expected_class):
@@ -47,7 +47,7 @@ class UnifiedSolutionExercise(BaseModel):
                 unified_solution_exercise=self,
                 message=(
                     f"Type mismatch! "
-                    f"Exercise type is '{self.answer_type.value}', which requires '{expected_class.__name__}', "
+                    f"Exercise type is '{self.exercise_type.value}', which requires '{expected_class.__name__}', "
                     f"but got '{type(self.answer).__name__}'."
                 ),
             )
