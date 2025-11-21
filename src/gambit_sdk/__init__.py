@@ -11,7 +11,6 @@ The main entry points are:
   structures used for communication with the Gambit CORE system.
 """
 
-from . import errors, utils
 from .base_adapter import BaseAdapter
 from .enums import ExerciseType
 from .schemas import (
