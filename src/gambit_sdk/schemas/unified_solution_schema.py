@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel, model_validator
 
-from gambit_sdk import ExerciseType
-from gambit_sdk.errors import SolutionTypeMismatchError
+from gambit_sdk.enums.exercise_type_enum import ExerciseType
+from gambit_sdk.errors.gambit_sdk_errors import SolutionTypeMismatchError
 from gambit_sdk.schemas.solution_type_schemas import (
     SingleChoiceAnswer,
     MultipleChoiceAnswer,

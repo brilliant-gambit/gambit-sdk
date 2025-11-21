@@ -1,4 +1,4 @@
-from gambit_sdk import UnifiedSolutionExercise
+from gambit_sdk.schemas.unified_solution_schema import UnifiedSolutionExercise
 
 
 class GambitSDKError(Exception):

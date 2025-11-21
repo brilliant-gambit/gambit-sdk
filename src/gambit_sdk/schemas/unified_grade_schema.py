@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from gambit_sdk import UnifiedSolution
+from gambit_sdk.schemas.unified_solution_schema import UnifiedSolution
 
 
 class UnifiedGrade(BaseModel):
