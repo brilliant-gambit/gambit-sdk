@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gambit-sdk"
-version = "0.4.3"
+version = "0.4.4"
 description = "The official SDK for building Gambit Platform Adapters"
 authors = ["Mikhail Shevernev <shevernev007@gmail.com>"]
 license = "Proprietary"

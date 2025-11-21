@@ -1,23 +1,19 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 from pydantic import BaseModel, model_validator
 
 from gambit_sdk.enums.exercise_type_enum import ExerciseType
 from gambit_sdk.errors.gambit_sdk_errors import SolutionTypeMismatchError
 from gambit_sdk.utils.exercise_type_to_answer_class import EXERCISE_TYPE_TO_ANSWER_CLASS
-
-if TYPE_CHECKING:
-    from gambit_sdk.schemas.solution_type_schemas import (
-        MatchingAnswer,
-        MultipleChoiceAnswer,
-        OrderingAnswer,
-        SingleChoiceAnswer,
-        StringAnswer,
-        TextAnswer,
-        TextFileAnswer,
-    )
+from gambit_sdk.schemas.solution_type_schemas import (
+    MatchingAnswer,
+    MultipleChoiceAnswer,
+    OrderingAnswer,
+    SingleChoiceAnswer,
+    StringAnswer,
+    TextAnswer,
+    TextFileAnswer,
+)
 
 
 class UnifiedSolutionExercise(BaseModel):
