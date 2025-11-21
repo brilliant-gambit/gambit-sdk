@@ -14,7 +14,8 @@ The main entry points are:
 from .base_adapter import BaseAdapter
 from .enums import ExerciseType
 from .schemas import (
-    ChoiceAnswer,
+    SingleChoiceAnswer,
+    MultipleChoiceAnswer,
     ChoiceStructure,
     MatchingAnswer,
     MatchingStructure,
@@ -31,10 +32,13 @@ from .schemas import (
     UnifiedSolution,
     UnifiedSolutionExercise,
 )
+import errors
+import utils
 
 __all__ = [
     "BaseAdapter",
-    "ChoiceAnswer",
+    "SingleChoiceAnswer",
+    "MultipleChoiceAnswer",
     "ChoiceStructure",
     "ExerciseType",
     "MatchingAnswer",
@@ -51,4 +55,6 @@ __all__ = [
     "UnifiedGrade",
     "UnifiedSolution",
     "UnifiedSolutionExercise",
+    "errors",
+    "utils",
 ]

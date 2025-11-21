@@ -1,7 +1,11 @@
 from pydantic import BaseModel
 
 
-class ChoiceAnswer(BaseModel):
+class SingleChoiceAnswer(BaseModel):
+    selected_id: str
+
+
+class MultipleChoiceAnswer(BaseModel):
     selected_ids: list[str]
 
 

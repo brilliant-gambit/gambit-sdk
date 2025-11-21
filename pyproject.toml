@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "gambit-sdk"
-version = "0.3.1"
+version = "0.4.0"
 description = "The official SDK for building Gambit Platform Adapters"
 authors = ["Mikhail Shevernev <shevernev007@gmail.com>"]
 license = "Proprietary"
 readme = "README.md"
 homepage = "https://github.com/brilliant-gambit/gambit-sdk"
-repository = "https://github.com/твой_ник/gambit-sdk"
+repository = "https://github.com/brilliant-gambit/gambit-sdk"
 keywords = ["sdk", "api", "gambit", "edtech"]
 
 classifiers = [

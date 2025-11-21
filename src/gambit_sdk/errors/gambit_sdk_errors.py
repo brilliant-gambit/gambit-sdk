@@ -1,0 +1,17 @@
+from gambit_sdk import UnifiedSolutionExercise
+
+
+class GambitSDKError(Exception):
+    def __init__(self, message: str) -> None:
+        self.message = message
+        super().__init__(self.message)
+
+
+class SolutionTypeMismatchError(GambitSDKError):
+    def __init__(
+            self,
+            unified_solution_exercise: UnifiedSolutionExercise,
+            message: str,
+    ) -> None:
+        self.unified_solution_exercise = unified_solution_exercise
+        super().__init__(message)
