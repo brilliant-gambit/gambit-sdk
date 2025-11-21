@@ -13,7 +13,7 @@ from gambit_sdk.schemas.solution_type_schemas import (
     TextAnswer,
     TextFileAnswer,
 )
-from gambit_sdk.utils import EXERCISE_TYPE_TO_ANSWER_CLASS
+from gambit_sdk.utils.exercise_type_to_answer_class import EXERCISE_TYPE_TO_ANSWER_CLASS
 
 
 class UnifiedSolutionExercise(BaseModel):

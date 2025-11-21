@@ -32,8 +32,7 @@ from .schemas import (
     UnifiedSolution,
     UnifiedSolutionExercise,
 )
-import errors
-import utils
+from . import errors, utils
 
 __all__ = [
     "BaseAdapter",
