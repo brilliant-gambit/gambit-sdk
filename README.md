@@ -1,6 +1,6 @@
 # Gambit Platform Integration SDK
 
-[![PyPI version](https://badge.fury.io/py/gambit-sdk.svg)](https://badge.fury.io/py/gambit-sdk)
+[![PyPI version](https://badge.fury.io/py/gambit-sdk.svg?v=1)](https://badge.fury.io/py/gambit-sdk)
 [![Python Version](https://img.shields.io/pypi/pyversions/gambit-sdk)](https://pypi.org/project/gambit-sdk/)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 
@@ -39,6 +39,8 @@ from gambit_sdk import (
     UnifiedExercise,
     UnifiedGrade,
     UnifiedSolution,
+    UnifiedCredentials,
+    UnifiedAuthSession,
     StringAnswer,
 )
 
@@ -48,13 +50,29 @@ class MyPlatformAdapter(BaseAdapter):
         super().__init__(session)
         self.base_url = "https://api.my-platform.com"
 
-    async def login(self, username: str, password: str) -> None:
-        """Логинимся на платформе и сохраняем токен/cookie в сессию."""
+    async def login(self, credentials: UnifiedCredentials) -> UnifiedAuthSession:
+        """
+        Логинимся на платформе.
+        Возвращаем сессию, которую сервис сохранит и будет применять к запросам.
+        """
         response = await self.session.post(
             f"{self.base_url}/auth/login",
-            json={"username": username, "password": password}
+            json={"username": credentials.username, "password": credentials.password}
         )
         response.raise_for_status()
+        
+        # Возвращаем данные сессии (токены, куки)
+        return UnifiedAuthSession(
+            headers={"Authorization": f"Bearer {response.json()['token']}"},
+            cookies=dict(response.cookies),
+            refresh_data={"refresh_token": response.json()['refresh_token']}
+        )
+
+    async def refresh_session(self) -> UnifiedAuthSession:
+        """Обновляем токен, используя данные из текущей сессии."""
+        # self.session уже содержит старые куки/хедеры
+        # Но refresh_token может лежать отдельно, его нужно достать из self.refresh_data
+        pass
 
     async def get_assignment_previews(self) -> list[UnifiedAssignmentPreview]:
         """Получаем легкий список заданий."""
@@ -182,13 +200,14 @@ class MyPlatformAdapter(BaseAdapter):
 
 Хост-система `AdapterRunner` взаимодействует с адаптером в строгом порядке:
 
-1.  **`login`**: Аутентификация и настройка сессии.
-2.  **`get_assignment_previews`**: Получение списка доступных заданий.
-3.  **`get_assignment_details`**: Запрос деталей для конкретного задания.
+1.  **`login`**: Аутентификация. Адаптер возвращает `UnifiedAuthSession`.
+2.  **`load_session`**: Перед каждым действием сервис вызывает этот метод, чтобы применить сохраненные куки/хедеры к `self.session`.
+3.  **`get_assignment_previews`**: Получение списка доступных заданий.
+4.  **`get_assignment_details`**: Запрос деталей для конкретного задания.
     *   Возвращает **два** объекта: `Details` (текст задания) и `Attempt` (технические токены).
     *   `Details` сохраняются в кэш. `Attempt` используется для текущей сессии решения.
-4.  **`submit_solution`**: Отправка решения. Принимает `Attempt` (для токенов) и `Solution` (ответы).
-5.  **`get_grade`**: Проверка статуса. Принимает `Attempt`.
+5.  **`submit_solution`**: Отправка решения. Принимает `Attempt` (для токенов) и `Solution` (ответы).
+6.  **`get_grade`**: Проверка статуса. Принимает `Attempt`.
 
 ## Справочник по API
 
@@ -197,7 +216,9 @@ class MyPlatformAdapter(BaseAdapter):
 Абстрактный класс, который необходимо реализовать.
 
 - **`__init__(self, session: AsyncClient)`**: Принимает готовую сессию.
-- **`login(self, username, password)`**: Аутентификация.
+- **`load_session(self, auth_session: UnifiedAuthSession)`**: Применяет сессию. Реализован в базовом классе, но может быть переопределен.
+- **`login(self, credentials: UnifiedCredentials) -> UnifiedAuthSession`**: Аутентификация.
+- **`refresh_session(self) -> UnifiedAuthSession`**: Обновление токена.
 - **`get_assignment_previews(self) -> list[UnifiedAssignmentPreview]`**: Получение списка.
 - **`get_assignment_details(self, assignment) -> tuple[UnifiedAssignmentDetails, UnifiedAttempt]`**: Получение деталей и контекста попытки.
 - **`submit_solution(self, attempt, solution) -> UnifiedGrade | None`**: Отправка решения.

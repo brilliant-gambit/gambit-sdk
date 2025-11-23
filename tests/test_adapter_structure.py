@@ -1,5 +1,3 @@
-from typing import Any
-
 import pytest
 from httpx import AsyncClient
 
@@ -27,7 +25,7 @@ async def test_concrete_adapter_implementation() -> None:
         async def login(self, credentials: UnifiedCredentials) -> UnifiedAuthSession:
             return UnifiedAuthSession()
 
-        async def refresh_session(self, refresh_data: dict[str, Any]) -> UnifiedAuthSession:
+        async def refresh_session(self) -> UnifiedAuthSession:
             return UnifiedAuthSession()
 
         async def get_assignment_previews(self) -> list[UnifiedAssignmentPreview]:

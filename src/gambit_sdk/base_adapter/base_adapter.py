@@ -20,12 +20,14 @@ class BaseAdapter(ABC):
             session: AsyncClient,
     ) -> None:
         self.session = session
+        self.refresh_data: dict[str, Any] = {}
 
     def load_session(self, auth_session: UnifiedAuthSession) -> None:
         if auth_session.cookies:
             self.session.cookies.update(auth_session.cookies)
         if auth_session.headers:
             self.session.headers.update(auth_session.headers)
+        self.refresh_data = auth_session.refresh_data
 
     @abstractmethod
     async def login(  # pragma: no cover
@@ -37,7 +39,6 @@ class BaseAdapter(ABC):
     @abstractmethod
     async def refresh_session(  # pragma: no cover
             self,
-            refresh_data: dict[str, Any],
     ) -> UnifiedAuthSession:
         pass
 
