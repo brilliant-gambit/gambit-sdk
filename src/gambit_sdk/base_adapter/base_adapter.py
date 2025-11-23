@@ -19,7 +19,7 @@ class BaseAdapter(ABC):
         self.session = session
 
     @abstractmethod
-    async def login(
+    async def login(  # pragma: no cover
             self,
             username: str,
             password: str,
@@ -27,20 +27,20 @@ class BaseAdapter(ABC):
         pass
 
     @abstractmethod
-    async def get_assignment_previews(
+    async def get_assignment_previews(  # pragma: no cover
             self,
     ) -> list[UnifiedAssignmentPreview]:
         pass
 
     @abstractmethod
-    async def get_assignment_details(
+    async def get_assignment_details(  # pragma: no cover
             self,
             assignment: UnifiedAssignmentPreview,
     ) -> tuple[UnifiedAssignmentDetails, UnifiedAttempt]:
         pass
 
     @abstractmethod
-    async def submit_solution(
+    async def submit_solution(  # pragma: no cover
             self,
             attempt: UnifiedAttempt,
             solution: UnifiedSolution,
@@ -48,7 +48,7 @@ class BaseAdapter(ABC):
         pass
 
     @abstractmethod
-    async def get_grade(
+    async def get_grade(  # pragma: no cover
             self,
             attempt: UnifiedAttempt,
     ) -> UnifiedGrade | None:

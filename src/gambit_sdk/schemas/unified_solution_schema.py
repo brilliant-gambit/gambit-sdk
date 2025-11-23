@@ -37,7 +37,7 @@ class UnifiedSolutionExercise(BaseModel):
 
         expected_class = EXERCISE_TYPE_TO_ANSWER_CLASS.get(self.exercise_type)
 
-        if expected_class is None:
+        if expected_class is None:  # pragma: no cover
             raise SolutionTypeMismatchError(
                 unified_solution_exercise=self,
                 message=f"Unknown or unmapped exercise type: {self.exercise_type}",
