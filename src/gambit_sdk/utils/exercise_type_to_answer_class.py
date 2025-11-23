@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
 from gambit_sdk.enums import ExerciseType
-
 from gambit_sdk.schemas.solution_type_schemas import (
     MatchingAnswer,
     MultipleChoiceAnswer,

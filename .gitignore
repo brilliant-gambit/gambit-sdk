@@ -6,4 +6,3 @@ __pycache__/
 poetry.lock
 
 dist
-test.py

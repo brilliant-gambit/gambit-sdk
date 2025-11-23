@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gambit-sdk"
-version = "0.4.4"
+version = "0.4.5"
 description = "The official SDK for building Gambit Platform Adapters"
 authors = ["Mikhail Shevernev <shevernev007@gmail.com>"]
 license = "Proprietary"
@@ -27,6 +27,7 @@ pydantic-settings = "^2.12.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = ">=0.14.5,<0.15.0"
+pyright = "^1.1.407"
 
 [build-system]
 requires = ["poetry-core"]
@@ -51,3 +52,21 @@ ignore = [
 ]
 [tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.File"]
+[tool.ruff.lint.flake8-type-checking]
+runtime-evaluated-base-classes = ["pydantic.BaseModel"]
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportMissingTypeStubs = "none"
+pythonVersion = "3.13.5"
+exclude = [
+    ".venv",
+    "**/__pycache__",
+    "alembic",
+    "tests",
+]
+extraPaths = [
+    "src",
+]
+venvPath = "."
+venv = ".venv"

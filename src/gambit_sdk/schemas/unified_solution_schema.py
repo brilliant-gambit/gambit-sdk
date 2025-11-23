@@ -4,7 +4,6 @@ from pydantic import BaseModel, model_validator
 
 from gambit_sdk.enums.exercise_type_enum import ExerciseType
 from gambit_sdk.errors.gambit_sdk_errors import SolutionTypeMismatchError
-from gambit_sdk.utils.exercise_type_to_answer_class import EXERCISE_TYPE_TO_ANSWER_CLASS
 from gambit_sdk.schemas.solution_type_schemas import (
     MatchingAnswer,
     MultipleChoiceAnswer,
@@ -31,6 +30,8 @@ class UnifiedSolutionExercise(BaseModel):
 
     @model_validator(mode="after")
     def check_exercise_type_match(self) -> UnifiedSolutionExercise:
+        from gambit_sdk.utils.exercise_type_to_answer_class import EXERCISE_TYPE_TO_ANSWER_CLASS  # noqa: PLC0415
+
         if self.exercise_type == ExerciseType.UNSUPPORTED:
             return self
 
