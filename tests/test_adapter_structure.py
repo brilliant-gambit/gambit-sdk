@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 from httpx import AsyncClient
 
@@ -6,6 +8,8 @@ from gambit_sdk.schemas import (
     UnifiedAssignmentDetails,
     UnifiedAssignmentPreview,
     UnifiedAttempt,
+    UnifiedAuthSession,
+    UnifiedCredentials,
     UnifiedGrade,
     UnifiedSolution,
 )
@@ -20,8 +24,11 @@ async def test_cannot_instantiate_abstract_adapter() -> None:
 
 async def test_concrete_adapter_implementation() -> None:
     class ConcreteAdapter(BaseAdapter):
-        async def login(self, username: str, password: str) -> None:
-            pass
+        async def login(self, credentials: UnifiedCredentials) -> UnifiedAuthSession:
+            return UnifiedAuthSession()
+
+        async def refresh_session(self, refresh_data: dict[str, Any]) -> UnifiedAuthSession:
+            return UnifiedAuthSession()
 
         async def get_assignment_previews(self) -> list[UnifiedAssignmentPreview]:
             return []
@@ -47,6 +54,18 @@ async def test_concrete_adapter_implementation() -> None:
 
     client = AsyncClient()
     adapter = ConcreteAdapter(session=client)
+
+    new_auth_session = UnifiedAuthSession(
+        headers={"Authorization": "Bearer 123", "User-Agent": "NewAgent"},
+        cookies={"session_id": "abc", "old_cookie": "new_val"},
+    )
+    adapter.load_session(new_auth_session)
+
+    assert adapter.session.headers["Authorization"] == "Bearer 123"
+    assert adapter.session.headers["User-Agent"] == "NewAgent"
+
+    assert adapter.session.cookies["session_id"] == "abc"
+    assert adapter.session.cookies["old_cookie"] == "new_val"
 
     assert adapter.session is client
 

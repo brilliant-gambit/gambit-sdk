@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 from httpx import AsyncClient
 
@@ -6,6 +7,8 @@ from gambit_sdk.schemas import (
     UnifiedAssignmentDetails,
     UnifiedAssignmentPreview,
     UnifiedAttempt,
+    UnifiedAuthSession,
+    UnifiedCredentials,
     UnifiedGrade,
     UnifiedSolution,
 )
@@ -18,12 +21,24 @@ class BaseAdapter(ABC):
     ) -> None:
         self.session = session
 
+    def load_session(self, auth_session: UnifiedAuthSession) -> None:
+        if auth_session.cookies:
+            self.session.cookies.update(auth_session.cookies)
+        if auth_session.headers:
+            self.session.headers.update(auth_session.headers)
+
     @abstractmethod
     async def login(  # pragma: no cover
             self,
-            username: str,
-            password: str,
-    ) -> None:
+            credentials: UnifiedCredentials,
+    ) -> UnifiedAuthSession:
+        pass
+
+    @abstractmethod
+    async def refresh_session(  # pragma: no cover
+            self,
+            refresh_data: dict[str, Any],
+    ) -> UnifiedAuthSession:
         pass
 
     @abstractmethod

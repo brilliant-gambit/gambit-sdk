@@ -7,7 +7,10 @@ if TYPE_CHECKING:
 
 
 class GambitSDKError(Exception):
-    def __init__(self, message: str) -> None:
+    def __init__(
+            self,
+            message: str,
+    ) -> None:
         self.message = message
         super().__init__(self.message)
 
@@ -19,4 +22,20 @@ class SolutionTypeMismatchError(GambitSDKError):
             message: str,
     ) -> None:
         self.unified_solution_exercise = unified_solution_exercise
+        super().__init__(message)
+
+
+class PlatformAuthenticationError(GambitSDKError):
+    def __init__(
+            self,
+            message: str,
+    ) -> None:
+        super().__init__(message)
+
+
+class RefreshNotSupportedError(GambitSDKError):
+    def __init__(
+            self,
+            message: str,
+    ) -> None:
         super().__init__(message)
