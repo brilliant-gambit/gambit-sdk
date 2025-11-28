@@ -39,3 +39,20 @@ class RefreshNotSupportedError(GambitSDKError):
             message: str,
     ) -> None:
         super().__init__(message)
+
+
+class PlatformUnavailableError(GambitSDKError):
+    def __init__(
+            self,
+            message: str,
+    ) -> None:
+        super().__init__(message)
+
+
+
+class PlatformStructureChangedError(GambitSDKError):
+    def __init__(
+            self,
+            message: str,
+    ) -> None:
+        super().__init__(message)

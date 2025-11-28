@@ -1,6 +1,8 @@
 from .gambit_sdk_errors import (
     GambitSDKError,
     PlatformAuthenticationError,
+    PlatformStructureChangedError,
+    PlatformUnavailableError,
     RefreshNotSupportedError,
     SolutionTypeMismatchError,
 )
@@ -8,6 +10,8 @@ from .gambit_sdk_errors import (
 __all__ = [
     "GambitSDKError",
     "PlatformAuthenticationError",
+    "PlatformStructureChangedError",
+    "PlatformUnavailableError",
     "RefreshNotSupportedError",
     "SolutionTypeMismatchError",
 ]

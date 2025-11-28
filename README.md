@@ -57,7 +57,7 @@ class MyPlatformAdapter(BaseAdapter):
         """
         response = await self.session.post(
             f"{self.base_url}/auth/login",
-            json={"username": credentials.username, "password": credentials.password}
+            json={"username": credentials.username, "password": credentials.password.get_secret_value()}
         )
         response.raise_for_status()
         
